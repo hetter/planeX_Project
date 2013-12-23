@@ -21,12 +21,63 @@ public:
     virtual ~BaseEvent();
     
     virtual void updateConditions() = 0;
-private:
+protected:
     int m_eventId;
-    std::vector<int> m_conditionLIst;
+    typedef std::map<int, bool> ConditionMap;
+    ConditionMap m_conditionMap;
 };
 
-class EventFactor:public Singleton<PlaneUnitMgr>
+class PlaneEvent:public BaseEvent
+{
+public:
+    //用与ccrect互转，为了实现union结构
+    struct EventRect
+    {
+        int x;
+        int y;
+        int width;
+        int height;
+    };
+    
+    enum EventEnum
+    {
+        RECT_EVENT = 0,
+        UNIT_EVENT = 1,
+    };
+    
+    typedef void (*RectEventFunc) (BasePlaneUnit*,  const cocos2d::CCRect&);
+    typedef void (*UnitEventFunc) (BasePlaneUnit*,  BasePlaneUnit*);
+    
+    typedef bool (*RectRaiseFunc) (BasePlaneUnit*,  const cocos2d::CCRect&);
+    typedef bool (*UnitRaiseFunc) (BasePlaneUnit*,  BasePlaneUnit*);
+public:
+    PlaneEvent(BasePlaneUnit* nodeUnit_);
+    ~PlaneEvent();
+    
+    void initWithRectEvent(RectRaiseFunc& raiseFunc_, RectEventFunc& eventFunc_, const cocos2d::CCRect& hitRect_);
+    void initWithUnitEvent(UnitRaiseFunc& raiseFunc_, UnitEventFunc& eventFunc_, BasePlaneUnit* targetUnit_);
+    void updateConditions();
+private:
+    union CallBackData
+    {
+        struct RectData
+        {
+            EventRect            targetRect;
+            RectRaiseFunc     rectRaiseFunc;
+            RectEventFunc     rectEventFunc;
+        } rectData;
+        struct UnitData
+        {
+            BasePlaneUnit*    targetUnit;
+            UnitRaiseFunc     unitRaiseFunc;
+            UnitEventFunc     unitEventFunc;
+        } unitData;
+    };
+    BasePlaneUnit* m_nodeUnit;
+    std::map<int, CallBackData> m_callBackDataMap;
+};
+
+class EventFactor:public Singleton<EventFactor>
 {
 public:
 private:
