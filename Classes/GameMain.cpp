@@ -6,6 +6,7 @@
 #include "Compent/EgCommon.h"
 #include "Core/HeadQuarter.h"
 #include "Base/IniReader.h"
+#include "Core/BaseEvent.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -74,8 +75,7 @@ bool GameMain::init()
     
     PlanePointMgr::NewInstance();
     PlaneUnitMgr::NewInstance();
-    
-
+    EventFactor::NewInstance();
     
     this->schedule( schedule_selector(GameMain::update) );
     
@@ -91,11 +91,13 @@ void GameMain::clean()
     }
     PlanePointMgr::ReleaseInstance();
     PlaneUnitMgr::ReleaseInstance();
+    EventFactor::ReleaseInstance();
     delete m_iniReader;
 }
 
 void GameMain::update(float dt)
 {
+    EventFactor::GetInstance()->updateEvents();
     //PlaneUnitMgr::GetInstance()->updatePlaneUnits();
 }
 

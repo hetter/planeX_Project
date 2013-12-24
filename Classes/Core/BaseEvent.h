@@ -17,14 +17,19 @@
 class BaseEvent
 {
 public:
-    BaseEvent();
-    virtual ~BaseEvent();
+    BaseEvent()
+    :m_bIsEventDead(false)
+    {}
     
-    virtual void updateConditions() = 0;
+    virtual ~BaseEvent()
+    {}
+    
+    virtual bool updateConditions() = 0;
 protected:
     int m_eventId;
     typedef std::map<int, bool> ConditionMap;
     ConditionMap m_conditionMap;
+    bool m_bIsEventDead;
 };
 
 class PlaneEvent:public BaseEvent
@@ -54,9 +59,9 @@ public:
     PlaneEvent(BasePlaneUnit* nodeUnit_);
     ~PlaneEvent();
     
-    void initWithRectEvent(RectRaiseFunc& raiseFunc_, RectEventFunc& eventFunc_, const cocos2d::CCRect& hitRect_);
-    void initWithUnitEvent(UnitRaiseFunc& raiseFunc_, UnitEventFunc& eventFunc_, BasePlaneUnit* targetUnit_);
-    void updateConditions();
+    void initWithRectEvent(RectRaiseFunc raiseFunc_, RectEventFunc eventFunc_, const cocos2d::CCRect& hitRect_);
+    void initWithUnitEvent(UnitRaiseFunc raiseFunc_, UnitEventFunc eventFunc_, BasePlaneUnit* targetUnit_);
+    bool updateConditions();
 private:
     union CallBackData
     {
@@ -80,7 +85,15 @@ private:
 class EventFactor:public Singleton<EventFactor>
 {
 public:
+    EventFactor();
+    ~EventFactor();
+    
+    void updateEvents();
+    
+    PlaneEvent* createPlaneEvent(BasePlaneUnit* nodeUnit_);
 private:
+    typedef std::map<int, BaseEvent*> EventMap;
+    EventMap m_eventMap;
 };
 
 #endif /* defined(__plane_demo__PlaneUnit__) */
