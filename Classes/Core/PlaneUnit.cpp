@@ -16,7 +16,6 @@
 #include "MainLogicLayer.h"
 #include "HeadQuarter.h"
 #include "../Compent/TroughCompent.h"
-#include "BaseEvent.h"
 
 USING_NS_CC;
 
@@ -54,19 +53,19 @@ BasePlaneUnit::BasePlaneUnit(const PLANE_FORCES& forces_, const PLANE_UNIT_TYPE&
     {
         case PLANE_FORCES_GREEN:
             addSprite = CCSprite::create("plane_green.png");
-            SGameMain->getMainLogicLayer()->addChild(m_sprite);
+            GetUnitMgr->getParentLayer()->addChild(m_sprite);
             break;
         case PLANE_FORCES_BLUE:
             addSprite = CCSprite::create("plane_blue.png");
-            SGameMain->getMainLogicLayer()->addChild(m_sprite);
+            GetUnitMgr->getParentLayer()->addChild(m_sprite);
             break;
         case PLANE_FORCES_RED:
             addSprite = CCSprite::create("plane_red.png");
-            SGameMain->getMainLogicLayer()->addChild(m_sprite);
+            GetUnitMgr->getParentLayer()->addChild(m_sprite);
             break;
         case PLANE_FORCES_YELLOW:
             addSprite = CCSprite::create("plane_yellow.png");
-            SGameMain->getMainLogicLayer()->addChild(m_sprite);
+            GetUnitMgr->getParentLayer()->addChild(m_sprite);
             break;
         default:
             break;
@@ -91,11 +90,28 @@ BasePlaneUnit::BasePlaneUnit(const PLANE_FORCES& forces_, const PLANE_UNIT_TYPE&
             break;
     }
 
-    m_attribute.health = SGameMainIni->getAttributeInt(planeType, "hp");
-    m_attribute.atk = SGameMainIni->getAttributeInt(planeType, "atk");
-    m_attribute.def = SGameMainIni->getAttributeInt(planeType, "def");
-    m_attribute.dex = SGameMainIni->getAttributeInt(planeType, "dex");
-    m_attribute.agi = SGameMainIni->getAttributeInt(planeType, "agi");
+    CCParticleSystemQuad* emitter1 = new CCParticleSystemQuad();
+    emitter1->initWithFile("5color22.plist");
+    emitter1->setPosition(ccp(m_sprite->getPosition().x + 40, m_sprite->getPosition().y + 20));
+    emitter1->setPositionType( kCCPositionTypeRelative );
+
+    CCParticleSystemQuad* emitter2 = new CCParticleSystemQuad();
+       // emitter2->setEmitterMode(kCCParticleModeRadius);
+    emitter2->initWithFile("5color22.plist");
+    emitter2->setPosition(ccp(m_sprite->getPosition().x + 20, m_sprite->getPosition().y + 20));
+    emitter2->setPositionType( kCCPositionTypeRelative );
+   
+   // emitter1->setEmitterMode(kCCParticleModeGravity);
+
+    
+    m_sprite->addChild(emitter1);
+    m_sprite->addChild(emitter2);
+
+    m_attribute.health = GetIniConfigs["BattleConfig"].getAttributeInt(planeType, "hp");
+    m_attribute.atk = GetIniConfigs["BattleConfig"].getAttributeInt(planeType, "atk");
+    m_attribute.def = GetIniConfigs["BattleConfig"].getAttributeInt(planeType, "def");
+    m_attribute.dex = GetIniConfigs["BattleConfig"].getAttributeInt(planeType, "dex");
+    m_attribute.agi = GetIniConfigs["BattleConfig"].getAttributeInt(planeType, "agi");
     
     m_hpTrough = new TroughCompent("hp_trough.png", m_attribute.health);
     m_sprite->addChild(m_hpTrough->getSprite());
@@ -106,7 +122,7 @@ BasePlaneUnit::BasePlaneUnit(const PLANE_FORCES& forces_, const PLANE_UNIT_TYPE&
 BasePlaneUnit::~BasePlaneUnit()
 {
     delete m_hpTrough;
-    SGameMain->getMainLogicLayer()->removeChild(m_sprite);
+    m_sprite->removeFromParent();
     CC_SAFE_RELEASE(m_sprite);
 }
 
@@ -335,49 +351,12 @@ void BasePlaneUnit::goForward(const int &step_)
     PlaneUnitMgr::GetInstance()->updatePlaneUnits();
 }
 
-
-/////////////////////////////////////////
-bool raiseTest(BasePlaneUnit* nodeUnit_, BasePlaneUnit* targetUnit_)
-{
-    CCPoint p1 = nodeUnit_->getCCSprite()->getPosition();
-    CCPoint p2 = targetUnit_->getCCSprite()->getPosition();
-    
-    int distance = ccpDistance(p1, p2);
-    if (distance < 160)
-        return true;
-    else
-        return false;
-}
-
-void eventTest(BasePlaneUnit* nodeUnit_, BasePlaneUnit* targetUnit_)
-{
-    CCPoint nowCcp = nodeUnit_->getCCSprite()->getPosition();
-    CCMoveTo*  move1 = CCMoveTo::create(0.1, ccp(nowCcp.x + 3.0f, nowCcp.y));
-    CCMoveTo*  move2 = CCMoveTo::create(0.1, ccp(nowCcp.x - 3.0f, nowCcp.y));
-    CCMoveTo*  move3 = CCMoveTo::create(0.1, ccp(nowCcp.x, nowCcp.y));
-    CCEaseElasticInOut*  move_ease_inout1= CCEaseElasticInOut::create((CCActionInterval*)(move1->copy()->autorelease()), 0.1);
-    CCEaseElasticInOut*  move_ease_inout2= CCEaseElasticInOut::create((CCActionInterval*)(move2->copy()->autorelease()), 0.1);
-    CCEaseElasticInOut*  move_ease_inout3= CCEaseElasticInOut::create((CCActionInterval*)(move3->copy()->autorelease()), 0.1);
-    
-    CCFiniteTimeAction*  move_ease_out1 = CCEaseSineInOut::create((CCActionInterval*)(move1->copy()->autorelease()));
-    CCFiniteTimeAction*  move_ease_out2 = CCEaseSineInOut::create((CCActionInterval*)(move2->copy()->autorelease()));
-    CCFiniteTimeAction*  move_ease_out3 = CCEaseSineInOut::create((CCActionInterval*)(move3->copy()->autorelease()));
-    
-    CCFiniteTimeAction* actions= CCSequence::create(move_ease_out1,
-                                                    move_ease_out2,
-                                                    move_ease_inout3, NULL);
-    
-    nodeUnit_->getCCSprite()->runAction(actions);
-}
-
-/////////////////////////////////////////
 void BasePlaneUnit::doDamage(const int& dg_)
 {
     m_attribute.health -= dg_;
     
     m_hpTrough->changeData(-dg_);
     
-    /*
     CCPoint nowCcp = m_sprite->getPosition();
     
     CCMoveTo*  move1 = CCMoveTo::create(0.1, ccp(nowCcp.x + 3.0f, nowCcp.y));
@@ -396,8 +375,6 @@ void BasePlaneUnit::doDamage(const int& dg_)
                                                                                    move_ease_inout3, NULL);
 
     m_sprite->runAction(actions);
-     */
-    
 
     
     if(m_attribute.health <= 0)
@@ -432,11 +409,7 @@ void BasePlaneUnit::atkOtherPlane(BasePlaneUnit* plane_, const ATK_FUNCTION& fun
     
     SGameMainLogic->printfDiceLR(agiFactor + calcDex, agiFactor + calcAgi);
     if(dexFactor + calcDex > agiFactor + calcAgi)
-    {
         plane_->doDamage(calcAtk);
-        PlaneEvent* ev = EventFactor::GetInstance()->createPlaneEvent(this);
-        ev->initWithUnitEvent(&raiseTest, &eventTest, plane_);
-    }
 }
 
 void BasePlaneUnit::goToPoint(const int &pointIndex_)
@@ -522,6 +495,11 @@ PlaneUnitMgr::PlaneUnitMgr()
 
 PlaneUnitMgr::~PlaneUnitMgr()
 {}
+
+void PlaneUnitMgr::init(cocos2d::CCLayer* parentLayer_)
+{
+    m_parentLayer = parentLayer_;
+}
 
 void PlaneUnitMgr::updatePlaneUnits()
 {

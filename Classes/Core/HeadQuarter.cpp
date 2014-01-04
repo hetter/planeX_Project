@@ -119,12 +119,17 @@ HeadQuarter::HeadQuarter(const PLANE_FORCES& forces_)
         m_airfields[i].position = ccpAdd(hqPoint, office);
     }
     
-    SGameMain->getMainLogicLayer()->addChild(m_hqSprite);
+    //SGameMain->getMainLogicLayer()->addChild(m_hqSprite);
 }
 
 HeadQuarter::~HeadQuarter()
 {
-    SGameMain->getMainLogicLayer()->removeChild(m_hqSprite);
+    m_hqSprite->removeFromParent();
+}
+
+void HeadQuarter::addTolayer(cocos2d::CCLayer *layer_)
+{
+    layer_->addChild(m_hqSprite);
 }
 
 void HeadQuarter::emptyAirFieldOnce(const cocos2d::CCPoint& pos_)

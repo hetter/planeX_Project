@@ -20,7 +20,8 @@ public:
     ~HeadQuarter();
     bool onTouch(const cocos2d::CCPoint& touch_);
     const PLANE_FORCES& getForces() {return m_forces;}
-    void emptyAirFieldOnce(const cocos2d::CCPoint& pos_); 
+    void emptyAirFieldOnce(const cocos2d::CCPoint& pos_);
+    void addTolayer(cocos2d::CCLayer* layer_);
 private:
     struct Airfield
     {

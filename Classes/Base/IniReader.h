@@ -16,6 +16,13 @@ class IniReader
 {
 public:
     IniReader();
+    
+    IniReader(const IniReader& reader_);
+    
+    IniReader& operator = (const IniReader& reader_);
+    
+    void _doCopy(const IniReader& reader_);
+    
     ~IniReader();
     
     void loadIniFile(const char* filePath_);

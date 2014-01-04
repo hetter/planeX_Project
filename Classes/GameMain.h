@@ -6,7 +6,7 @@
 #include "Base/IniReader.h"
 
 class MainLogicLayer;
-class IniReader;
+class BaseLayer;
 
 class GameMain : public cocos2d::CCLayer
 {
@@ -32,21 +32,20 @@ public:
     void ccTouchMoved  (cocos2d::CCTouch* touch_, cocos2d:: CCEvent* event_);
     void ccTouchEnded   (cocos2d::CCTouch* touch_, cocos2d:: CCEvent* event_);
     
-    MainLogicLayer* getMainLogicLayer() {return m_mainLogicLayer;}
-    void setMainLogicLayer(MainLogicLayer* logic_) {m_mainLogicLayer = logic_;}
-    
-    IniReader* getIniReader() {return m_iniReader;}
+    BaseLayer* getTopLayer() {return m_topLayer;}
     
     void update(float dt);
+    
+    MainLogicLayer* getMainLogicLayer() {return m_mainLogicLayer;}
+    void setMainLogicLayer(MainLogicLayer* layer_) {m_mainLogicLayer = layer_;}
 private:
     MainLogicLayer* m_mainLogicLayer;
     IniReader* m_iniReader;
+    BaseLayer* m_topLayer;
 };
 
 #define SGameMain (GameMain::SELF)
 
 #define SGameMainLogic (GameMain::SELF->getMainLogicLayer())
-
-#define SGameMainIni (GameMain::SELF->getIniReader())
 
 #endif // __HELLOWORLD_SCENE_H__

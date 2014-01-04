@@ -7,6 +7,18 @@
     <Filter Include="Classes">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Base">
+      <UniqueIdentifier>{eece554d-72dc-40b4-95d5-8e952d365108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Compent">
+      <UniqueIdentifier>{0bbc5caa-2e53-4dbf-a956-3e7d9e3c76f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Core">
+      <UniqueIdentifier>{aef8a891-5633-4921-99a2-654c986381dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\platform">
+      <UniqueIdentifier>{c7f1b3a4-6b42-44ef-82c7-23aeb4787513}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -15,8 +27,38 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+    <ClCompile Include="..\Classes\GameMain.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Base\IniReader.cpp">
+      <Filter>Classes\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Compent\EgCommon.cpp">
+      <Filter>Classes\Compent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Compent\PopupDialog.cpp">
+      <Filter>Classes\Compent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Compent\TroughCompent.cpp">
+      <Filter>Classes\Compent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Core\PlaneUnit.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Core\BaseEvent.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Core\HeadQuarter.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Core\MainLogicLayer.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Core\PlanePoint.cpp">
+      <Filter>Classes\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Core\GameLoginLayer.cpp">
+      <Filter>Classes\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -26,8 +68,44 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
+    <ClInclude Include="..\Classes\GAME_DECLARATION.h">
       <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameMain.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Base\Singleton.hpp">
+      <Filter>Classes\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Base\IniReader.h">
+      <Filter>Classes\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Compent\EgCommon.h">
+      <Filter>Classes\Compent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Compent\PopupDialog.h">
+      <Filter>Classes\Compent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Compent\TroughCompent.h">
+      <Filter>Classes\Compent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Core\PlanePoint.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Core\PlaneUnit.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Core\BaseEvent.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Core\HeadQuarter.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Core\MainLogicLayer.h">
+      <Filter>Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Core\GameLoginLayer.h">
+      <Filter>Classes\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

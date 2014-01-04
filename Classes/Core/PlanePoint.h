@@ -93,7 +93,7 @@ public:
     PlanePointMgr();
     ~PlanePointMgr();
     
-    void init();
+    void init(cocos2d::CCLayer* parentLayer_);
     void loadTitleFile(const std::string& name_);
     cocos2d::CCSprite* createTitleSprite(const std::string& name_);
 public:
@@ -106,6 +106,8 @@ public:
     const cocos2d::CCPoint& getPlaneGoalPos(const PLANE_FORCES& forces_, const int& ringIdex_);
     
     BasePlanePoint* getKillPoint(const PLANE_FORCES& forces_);
+    
+    cocos2d::CCLayer* getParentLayer() {return m_parentLayer;}
 private:
     void _addRoadPoint(const cocos2d::CCPoint&   point_,
                                    const PLANE_FORCES& head_,
@@ -122,6 +124,11 @@ private:
     int m_firstRoadPointIndex[PLANE_FORCES_COUNT];
     int m_endRoadPointIndex[PLANE_FORCES_COUNT];
     int m_strikePointIndex[PLANE_FORCES_COUNT];
+    
+    cocos2d::CCLayer* m_parentLayer;
 };
+
+#define GetPointMgr (PlanePointMgr::GetInstance())
+
 
 #endif /* defined(__plane_demo__PlanePoint__) */

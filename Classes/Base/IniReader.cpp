@@ -29,6 +29,30 @@ void trim(std::string& output_)
 IniReader::IniReader()
 {}
 
+IniReader::IniReader(const IniReader& reader_)
+{
+    _doCopy(reader_);
+}
+
+IniReader& IniReader::operator=(const IniReader &reader_)
+{
+     _doCopy(reader_);
+    return *this;
+}
+
+void IniReader::_doCopy(const IniReader &reader_)
+{
+    for (IniGroup::const_iterator iItr = reader_.m_iniGroupMap.begin();
+         iItr != reader_.m_iniGroupMap.end(); ++iItr)
+    {
+        for (IniAttribute::const_iterator jItr = iItr->second.begin();
+             jItr != iItr->second.end(); ++jItr)
+        {
+            m_iniGroupMap[iItr->first][jItr->first] = jItr->second;
+        }
+    }
+}
+
 IniReader::~IniReader()
 {}
 

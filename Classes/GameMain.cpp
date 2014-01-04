@@ -1,12 +1,13 @@
 #include "GameMain.h"
 #include "SimpleAudioEngine.h"
-#include "Core/MainLogicLayer.h"
+#include "Core/Layers/MainLogicLayer.h"
+#include "Core/Layers/GameLoginLayer.h"
 #include "Core/PlanePoint.h"
 #include "Core/PlaneUnit.h"
 #include "Compent/EgCommon.h"
 #include "Core/HeadQuarter.h"
 #include "Base/IniReader.h"
-#include "Core/BaseEvent.h"
+#include "Core/Configs/IniDataConfigs.hpp"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -35,7 +36,8 @@ GameMain* GameMain::create()
     } 
 }
 
-GameMain::GameMain()
+GameMain::GameMain():
+m_topLayer(NULL)
 {}
 
 GameMain::~GameMain()
@@ -45,59 +47,38 @@ GameMain::~GameMain()
 
 bool GameMain::init()
 {
-    //////////////////////////////
-    // 1. super init first
     if ( !CCLayer::init() )
     {
         return false;
     }
     
-    std::string batConfigfullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename("battleConfig.ini");
-    m_iniReader = new IniReader();
-    m_iniReader->loadIniFile(batConfigfullPath.c_str());
+    IniDataConfigs::NewInstance();
+    
+    m_topLayer = BaseLayer::create();
+    addChild(m_topLayer->getCCLayer());
+    m_topLayer->retain();
+    
+    BaseLayer* login = GameLoginLayer::create();
+    m_topLayer->pushLayer(login);
 
-
-    // add a "close" icon to exit the progress. it's an autorelease object
-    //CCMenuItemImage *pCloseItem = CCMenuItemImage::create(
-    //                                                      "CloseNormal.png",
-    //                                                      "CloseSelected.png",
-    //                                                      this,
-    //                                                      menu_selector(GameMain::menuCloseCallback) );
-    //pCloseItem->setPosition( ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20) );
-    
-    // create menu, it's an autorelease object
-    //CCMenu* pMenu = CCMenu::create(pCloseItem, NULL);
-    //pMenu->setPosition( CCPointZero );
-    //this->addChild(pMenu, 1);
-    
-    MainLogicLayer::create();
-    addChild(m_mainLogicLayer);
-    
-    PlanePointMgr::NewInstance();
-    PlaneUnitMgr::NewInstance();
-    EventFactor::NewInstance();
-    
     this->schedule( schedule_selector(GameMain::update) );
-    
+    CCDirector* pDirector = CCDirector::sharedDirector();
+    pDirector->getTouchDispatcher()->addTargetedDelegate(this,0,true);
     return true;
 }
 
 void GameMain::clean()
 {
-    if(m_mainLogicLayer)
+    if(m_topLayer)
     {
-        m_mainLogicLayer->release();
-        m_mainLogicLayer = NULL;
+        m_topLayer->release();
+        m_topLayer = NULL;
     }
-    PlanePointMgr::ReleaseInstance();
-    PlaneUnitMgr::ReleaseInstance();
-    EventFactor::ReleaseInstance();
-    delete m_iniReader;
+    IniDataConfigs::ReleaseInstance();
 }
 
 void GameMain::update(float dt)
 {
-    EventFactor::GetInstance()->updateEvents();
     //PlaneUnitMgr::GetInstance()->updatePlaneUnits();
 }
 

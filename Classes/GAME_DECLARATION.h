@@ -14,6 +14,7 @@
 #include "ccMacros.h"
 
 #include "Base/Singleton.hpp"
+#include "Core/Configs/IniDataConfigs.hpp"
 
 NS_CC_BEGIN
 class CCSprite;
@@ -23,11 +24,14 @@ class CCNode;
 class CCObject;
 class CCFiniteTimeAction;
 class CCScene;
+class CCLayer;
 
 typedef void (CCObject::*SEL_CallFuncN)(CCNode*);
 NS_CC_END
 
+class BaseLayer;
 class BasePlaneUnit;
+
 
 enum PLANE_FORCES
 {

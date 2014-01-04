@@ -34,7 +34,7 @@ BasePlanePoint::BasePlanePoint(CCSprite* sprite_,
 ,m_staticDir(dir_)
 ,m_index(-1)
 {
-    SGameMain->getMainLogicLayer()->addChild(m_sprite);
+    GetPointMgr->getParentLayer()->addChild(m_sprite);
     m_point = ccpAdd(m_sprite->getPosition(), offsetPoint_);
     m_labelTag = CCLabelTTF::create("", "微软雅黑", 25);
     m_labelTag->setColor(ccc3(160, 20, 60));
@@ -44,7 +44,7 @@ BasePlanePoint::BasePlanePoint(CCSprite* sprite_,
 
 BasePlanePoint::~BasePlanePoint()
 {
-    SGameMain->getMainLogicLayer()->removeChild(m_sprite);
+    m_sprite->removeFromParent();
     m_sprite->release();
 }
 
@@ -57,7 +57,7 @@ void BasePlanePoint::setSpriteAndOffset(cocos2d::CCSprite* sprite_, const cocos2
 {
         if(m_sprite)
         {
-            SGameMain->getMainLogicLayer()->removeChild(m_sprite);
+            m_sprite->removeFromParent();
             m_sprite->release();
         }
         m_sprite = sprite_;
@@ -102,8 +102,8 @@ AtkPlanePoint::AtkPlanePoint(CCSprite* sprite_,
                                              const CCPoint& offsetPoint_)
 :BasePlanePoint(sprite_, forces_, dir_, jumpType_, offsetPoint_)
 {
-    m_atk = SGameMainIni->getAttributeInt("atk_point", "atk");
-    m_dex = SGameMainIni->getAttributeInt("atk_point", "dex");
+    m_atk = GetIniConfigs["BattleConfig"].getAttributeInt("atk_point", "atk");
+    m_dex = GetIniConfigs["BattleConfig"].getAttributeInt("atk_point", "dex");
     m_labelTag->setString("");
 }
 
@@ -128,7 +128,7 @@ StopPlanePoint::StopPlanePoint(CCSprite* sprite_,
                              const CCPoint& offsetPoint_):
 BasePlanePoint(sprite_, forces_, dir_, jumpType_, offsetPoint_)
 {
-    m_stopFactor = SGameMainIni->getAttributeInt("stop_point", "stop");
+    m_stopFactor = GetIniConfigs["BattleConfig"].getAttributeInt("stop_point", "stop");
     m_labelTag->setString("");
 }
 
@@ -148,15 +148,15 @@ PLANE_POINT_PASS_EFF StopPlanePoint::getPassEffect()
 
 /////////////////////////////////////////
 PlanePointMgr::PlanePointMgr()
+:m_parentLayer(NULL)
 {
-    init();
 }
 
 PlanePointMgr::~PlanePointMgr()
 {
 }
 
-void PlanePointMgr::init()
+void PlanePointMgr::init(CCLayer* parentLayer_)
 {
     loadTitleFile("baseTitle");
     
@@ -165,6 +165,8 @@ void PlanePointMgr::init()
     
     point_width = 50;//m_titleDataUnit.rectVec[RED_POINT_ATK].size.width;
     point_height = 50;//m_titleDataUnit.rectVec[RED_POINT_ATK].size.height;
+    
+    m_parentLayer = parentLayer_;
 
     IniReader* iniReader = new IniReader;
     std::string batConfigfullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename("mapConfig.ini");

@@ -133,9 +133,16 @@
 		15A3DAED1682F8A6002FB0C5 /* CocosDenshion.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A3DA8B1682F8A6002FB0C5 /* CocosDenshion.m */; };
 		15A3DAEE1682F8A6002FB0C5 /* SimpleAudioEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15A3DA8C1682F8A6002FB0C5 /* SimpleAudioEngine.mm */; };
 		15A3DAEF1682F8A6002FB0C5 /* SimpleAudioEngine_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = 15A3DA8E1682F8A6002FB0C5 /* SimpleAudioEngine_objc.m */; };
+		1809EDB71875A159002474EA /* 5color22.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1809EDB31875A159002474EA /* 5color22.plist */; };
+		1809EDC11875A44A002474EA /* BaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1809EDBF1875A44A002474EA /* BaseLayer.cpp */; };
+		1809EDCC1875B969002474EA /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809EDC81875B969002474EA /* button.png */; };
+		1809EDCD1875B969002474EA /* button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809EDC91875B969002474EA /* button2.png */; };
+		1809EDCE1875B969002474EA /* plane_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 1809EDCA1875B969002474EA /* plane_1.json */; };
+		1809EDCF1875B969002474EA /* strikers_1945_front.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809EDCB1875B969002474EA /* strikers_1945_front.png */; };
+		183A0FEF187701C900049A6C /* GameLoginLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 183A0FED187701C900049A6C /* GameLoginLayer.cpp */; };
+		183A0FF21877022100049A6C /* MainLogicLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 183A0FF01877022100049A6C /* MainLogicLayer.cpp */; };
 		1858D8861866EDB400FC0611 /* BaseEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1858D8851866EDB400FC0611 /* BaseEvent.cpp */; };
 		188CA4311842414700DA5493 /* HeadQuarter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188CA4291842414700DA5493 /* HeadQuarter.cpp */; };
-		188CA4321842414700DA5493 /* MainLogicLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188CA42B1842414700DA5493 /* MainLogicLayer.cpp */; };
 		188CA4331842414700DA5493 /* PlanePoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188CA42D1842414700DA5493 /* PlanePoint.cpp */; };
 		188CA4341842414700DA5493 /* PlaneUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188CA42F1842414700DA5493 /* PlaneUnit.cpp */; };
 		188CA43B1842415500DA5493 /* EgCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188CA4351842415500DA5493 /* EgCommon.cpp */; };
@@ -540,12 +547,21 @@
 		15A3DA8C1682F8A6002FB0C5 /* SimpleAudioEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SimpleAudioEngine.mm; sourceTree = "<group>"; };
 		15A3DA8D1682F8A6002FB0C5 /* SimpleAudioEngine_objc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleAudioEngine_objc.h; sourceTree = "<group>"; };
 		15A3DA8E1682F8A6002FB0C5 /* SimpleAudioEngine_objc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleAudioEngine_objc.m; sourceTree = "<group>"; };
+		1809EDB31875A159002474EA /* 5color22.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 5color22.plist; sourceTree = "<group>"; };
+		1809EDBF1875A44A002474EA /* BaseLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseLayer.cpp; path = ../Classes/Core/Layers/BaseLayer.cpp; sourceTree = "<group>"; };
+		1809EDC01875A44A002474EA /* BaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseLayer.h; path = ../Classes/Core/Layers/BaseLayer.h; sourceTree = "<group>"; };
+		1809EDC81875B969002474EA /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		1809EDC91875B969002474EA /* button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button2.png; sourceTree = "<group>"; };
+		1809EDCA1875B969002474EA /* plane_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plane_1.json; sourceTree = "<group>"; };
+		1809EDCB1875B969002474EA /* strikers_1945_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strikers_1945_front.png; sourceTree = "<group>"; };
+		183A0FED187701C900049A6C /* GameLoginLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameLoginLayer.cpp; path = ../Classes/Core/Layers/GameLoginLayer.cpp; sourceTree = "<group>"; };
+		183A0FEE187701C900049A6C /* GameLoginLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLoginLayer.h; path = ../Classes/Core/Layers/GameLoginLayer.h; sourceTree = "<group>"; };
+		183A0FF01877022100049A6C /* MainLogicLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainLogicLayer.cpp; path = ../Classes/Core/Layers/MainLogicLayer.cpp; sourceTree = "<group>"; };
+		183A0FF11877022100049A6C /* MainLogicLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainLogicLayer.h; path = ../Classes/Core/Layers/MainLogicLayer.h; sourceTree = "<group>"; };
 		1858D8841866EDA600FC0611 /* BaseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseEvent.h; path = ../Classes/Core/BaseEvent.h; sourceTree = "<group>"; };
 		1858D8851866EDB400FC0611 /* BaseEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BaseEvent.cpp; path = ../Classes/Core/BaseEvent.cpp; sourceTree = "<group>"; };
 		188CA4291842414700DA5493 /* HeadQuarter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HeadQuarter.cpp; path = ../Classes/Core/HeadQuarter.cpp; sourceTree = "<group>"; };
 		188CA42A1842414700DA5493 /* HeadQuarter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadQuarter.h; path = ../Classes/Core/HeadQuarter.h; sourceTree = "<group>"; };
-		188CA42B1842414700DA5493 /* MainLogicLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainLogicLayer.cpp; path = ../Classes/Core/MainLogicLayer.cpp; sourceTree = "<group>"; };
-		188CA42C1842414700DA5493 /* MainLogicLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainLogicLayer.h; path = ../Classes/Core/MainLogicLayer.h; sourceTree = "<group>"; };
 		188CA42D1842414700DA5493 /* PlanePoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlanePoint.cpp; path = ../Classes/Core/PlanePoint.cpp; sourceTree = "<group>"; };
 		188CA42E1842414700DA5493 /* PlanePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlanePoint.h; path = ../Classes/Core/PlanePoint.h; sourceTree = "<group>"; };
 		188CA42F1842414700DA5493 /* PlaneUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlaneUnit.cpp; path = ../Classes/Core/PlaneUnit.cpp; sourceTree = "<group>"; };
@@ -576,6 +592,7 @@
 		188CA4511842420900DA5493 /* plane_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plane_red.png; sourceTree = "<group>"; };
 		188CA4521842420900DA5493 /* plane_shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plane_shadow.png; sourceTree = "<group>"; };
 		188CA4531842420900DA5493 /* plane_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plane_yellow.png; sourceTree = "<group>"; };
+		18E285811877BC84001F90A9 /* IniDataConfigs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = IniDataConfigs.hpp; path = ../Classes/Core/Configs/IniDataConfigs.hpp; sourceTree = "<group>"; };
 		1A27573D1697CF2B00504026 /* CCEditBoxImplAndroid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCEditBoxImplAndroid.cpp; sourceTree = "<group>"; };
 		1A27573E1697CF2B00504026 /* CCEditBoxImplAndroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCEditBoxImplAndroid.h; sourceTree = "<group>"; };
 		1A8F3B43175E05DA00049216 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
@@ -1311,6 +1328,19 @@
 			path = ../classes;
 			sourceTree = "<group>";
 		};
+		1809EDBB1875A1B5002474EA /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				183A0FF01877022100049A6C /* MainLogicLayer.cpp */,
+				183A0FF11877022100049A6C /* MainLogicLayer.h */,
+				183A0FED187701C900049A6C /* GameLoginLayer.cpp */,
+				183A0FEE187701C900049A6C /* GameLoginLayer.h */,
+				1809EDBF1875A44A002474EA /* BaseLayer.cpp */,
+				1809EDC01875A44A002474EA /* BaseLayer.h */,
+			);
+			name = Layers;
+			sourceTree = "<group>";
+		};
 		188CA4261842412400DA5493 /* Base */ = {
 			isa = PBXGroup;
 			children = (
@@ -1337,18 +1367,26 @@
 		188CA4281842413800DA5493 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				18E285801877BC44001F90A9 /* Configs */,
+				1809EDBB1875A1B5002474EA /* Layers */,
 				1858D8851866EDB400FC0611 /* BaseEvent.cpp */,
 				1858D8841866EDA600FC0611 /* BaseEvent.h */,
 				188CA4291842414700DA5493 /* HeadQuarter.cpp */,
 				188CA42A1842414700DA5493 /* HeadQuarter.h */,
-				188CA42B1842414700DA5493 /* MainLogicLayer.cpp */,
-				188CA42C1842414700DA5493 /* MainLogicLayer.h */,
 				188CA42D1842414700DA5493 /* PlanePoint.cpp */,
 				188CA42E1842414700DA5493 /* PlanePoint.h */,
 				188CA42F1842414700DA5493 /* PlaneUnit.cpp */,
 				188CA4301842414700DA5493 /* PlaneUnit.h */,
 			);
 			name = Core;
+			sourceTree = "<group>";
+		};
+		18E285801877BC44001F90A9 /* Configs */ = {
+			isa = PBXGroup;
+			children = (
+				18E285811877BC84001F90A9 /* IniDataConfigs.hpp */,
+			);
+			name = Configs;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -1790,6 +1828,11 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1809EDC81875B969002474EA /* button.png */,
+				1809EDC91875B969002474EA /* button2.png */,
+				1809EDCA1875B969002474EA /* plane_1.json */,
+				1809EDCB1875B969002474EA /* strikers_1945_front.png */,
+				1809EDB31875A159002474EA /* 5color22.plist */,
 				188CA4461842420900DA5493 /* baseTitle.png */,
 				188CA4471842420900DA5493 /* baseTitleData */,
 				188CA4481842420900DA5493 /* battleConfig.ini */,
@@ -1878,19 +1921,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1809EDCD1875B969002474EA /* button2.png in Resources */,
 				188CA4561842420900DA5493 /* battleConfig.ini in Resources */,
 				15A3D9961682F7F9002FB0C5 /* CMakeLists.txt in Resources */,
+				1809EDCF1875B969002474EA /* strikers_1945_front.png in Resources */,
 				188CA4611842420900DA5493 /* plane_yellow.png in Resources */,
 				188CA45E1842420900DA5493 /* plane_green.png in Resources */,
 				379BB9CC17F03F3700829B88 /* json_internalarray.inl in Resources */,
 				379BB9CD17F03F3700829B88 /* json_internalmap.inl in Resources */,
 				188CA4591842420900DA5493 /* headquarter_red.png in Resources */,
+				1809EDCC1875B969002474EA /* button.png in Resources */,
 				188CA4601842420900DA5493 /* plane_shadow.png in Resources */,
 				188CA4581842420900DA5493 /* headquarter_green.png in Resources */,
 				188CA45B1842420900DA5493 /* hp_trough.png in Resources */,
 				188CA45D1842420900DA5493 /* plane_blue.png in Resources */,
 				188CA45F1842420900DA5493 /* plane_red.png in Resources */,
+				1809EDB71875A159002474EA /* 5color22.plist in Resources */,
 				188CA45A1842420900DA5493 /* headquarter_yellow.png in Resources */,
+				1809EDCE1875B969002474EA /* plane_1.json in Resources */,
 				188CA4571842420900DA5493 /* headquarter_blue.png in Resources */,
 				188CA45C1842420900DA5493 /* mapConfig.ini in Resources */,
 				379BB9D017F03F3700829B88 /* json_valueiterator.inl in Resources */,
@@ -1953,6 +2001,7 @@
 				15A3D92A1682F7D5002FB0C5 /* b2WheelJoint.cpp in Sources */,
 				15A3D9391682F7D5002FB0C5 /* b2Rope.cpp in Sources */,
 				15A3D9951682F7F9002FB0C5 /* chipmunk.c in Sources */,
+				1809EDC11875A44A002474EA /* BaseLayer.cpp in Sources */,
 				188CA4311842414700DA5493 /* HeadQuarter.cpp in Sources */,
 				15A3D9971682F7F9002FB0C5 /* cpConstraint.c in Sources */,
 				15A3D9981682F7F9002FB0C5 /* cpDampedRotarySpring.c in Sources */,
@@ -1966,9 +2015,9 @@
 				15A3D9A01682F7F9002FB0C5 /* cpSimpleMotor.c in Sources */,
 				15A3D9A11682F7F9002FB0C5 /* cpSlideJoint.c in Sources */,
 				15A3D9A21682F7F9002FB0C5 /* cpArbiter.c in Sources */,
+				183A0FF21877022100049A6C /* MainLogicLayer.cpp in Sources */,
 				15A3D9A31682F7F9002FB0C5 /* cpArray.c in Sources */,
 				15A3D9A41682F7F9002FB0C5 /* cpBB.c in Sources */,
-				188CA4321842414700DA5493 /* MainLogicLayer.cpp in Sources */,
 				15A3D9A51682F7F9002FB0C5 /* cpBBTree.c in Sources */,
 				15A3D9A61682F7F9002FB0C5 /* cpBody.c in Sources */,
 				15A3D9A71682F7F9002FB0C5 /* cpCollision.c in Sources */,
@@ -2076,6 +2125,7 @@
 				379BB99D17F03F3700829B88 /* CCArmature.cpp in Sources */,
 				379BB99E17F03F3700829B88 /* CCBone.cpp in Sources */,
 				379BB99F17F03F3700829B88 /* CCDatas.cpp in Sources */,
+				183A0FEF187701C900049A6C /* GameLoginLayer.cpp in Sources */,
 				379BB9A017F03F3700829B88 /* CCBatchNode.cpp in Sources */,
 				379BB9A117F03F3700829B88 /* CCDecorativeDisplay.cpp in Sources */,
 				379BB9A217F03F3700829B88 /* CCDisplayFactory.cpp in Sources */,

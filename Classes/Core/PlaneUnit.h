@@ -96,9 +96,13 @@ public:
     PlaneUnitMgr();
     ~PlaneUnitMgr();
     
+    void init(cocos2d::CCLayer* parentLayer_);
+    
     bool addPlaneUnit(const PLANE_FORCES& forces_,
                                  const PLANE_UNIT_TYPE& type_,
                                  const cocos2d::CCPoint& pos_);
+    
+    cocos2d::CCLayer* getParentLayer() {return m_parentLayer;}
     
     BasePlaneUnit* checkAndGetPlaneUnit(const cocos2d::CCPoint& point_);
     BasePlaneUnit* getPlaneUnitOnRing(const int& index);
@@ -114,5 +118,9 @@ public:
 private:
     typedef std::map<int, std::string> PlanePointMap;
     PlaneUnits m_planeUnits[PLANE_FORCES_COUNT];
+    cocos2d::CCLayer* m_parentLayer;
 };
+
+#define GetUnitMgr (PlaneUnitMgr::GetInstance())
+
 #endif /* defined(__plane_demo__PlaneUnit__) */
