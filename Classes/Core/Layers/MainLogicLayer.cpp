@@ -13,6 +13,7 @@
 #include "../PlanePoint.h"
 #include "../PlaneUnit.h"
 #include "../HeadQuarter.h"
+#include "../BaseEvent.h"
 #include "../../Compent/PopupDialog.h"
 
 USING_NS_CC;
@@ -20,10 +21,16 @@ USING_NS_CC;
 
 
 MainLogicLayer::MainLogicLayer()
-{}
+{
+    PlanePointMgr::NewInstance();
+    PlaneUnitMgr::NewInstance();
+}
 
 MainLogicLayer::~MainLogicLayer()
-{}
+{
+    PlanePointMgr::ReleaseInstance();
+    PlaneUnitMgr::ReleaseInstance();
+}
 
 // on "init" you need to initialize your instance
 void MainLogicLayer::onEnter()
@@ -86,9 +93,7 @@ void MainLogicLayer::onEnter()
     //init a default position
     m_CCLayer->setPosition(ccp(20, 210));
     
-    PlanePointMgr::NewInstance();
     GetPointMgr->init(m_CCLayer);
-    PlaneUnitMgr::NewInstance();
     GetUnitMgr->init(m_CCLayer);
 }
 

@@ -16,6 +16,7 @@
 #include "MainLogicLayer.h"
 #include "HeadQuarter.h"
 #include "../Compent/TroughCompent.h"
+#include "BaseEvent.h"
 
 USING_NS_CC;
 
@@ -351,6 +352,44 @@ void BasePlaneUnit::goForward(const int &step_)
     PlaneUnitMgr::GetInstance()->updatePlaneUnits();
 }
 
+
+/////////////////////////////////////////
+bool raiseTest(BasePlaneUnit* nodeUnit_, BasePlaneUnit* targetUnit_)
+{
+    CCPoint p1 = nodeUnit_->getCCSprite()->getPosition();
+    CCPoint p2 = targetUnit_->getCCSprite()->getPosition();
+    
+    int distance = ccpDistance(p1, p2);
+    if (distance < 50)
+        return true;
+    else
+        return false;
+}
+
+void eventTest(BasePlaneUnit* nodeUnit_, BasePlaneUnit* targetUnit_, const PlaneEvent::AtkData& atkData_)
+{
+    CCPoint nowCcp = nodeUnit_->getCCSprite()->getPosition();
+    CCMoveTo*  move1 = CCMoveTo::create(0.1, ccp(nowCcp.x + 3.0f, nowCcp.y));
+    CCMoveTo*  move2 = CCMoveTo::create(0.1, ccp(nowCcp.x - 3.0f, nowCcp.y));
+    CCMoveTo*  move3 = CCMoveTo::create(0.1, ccp(nowCcp.x, nowCcp.y));
+    CCEaseElasticInOut*  move_ease_inout1= CCEaseElasticInOut::create((CCActionInterval*)(move1->copy()->autorelease()), 0.1);
+    CCEaseElasticInOut*  move_ease_inout2= CCEaseElasticInOut::create((CCActionInterval*)(move2->copy()->autorelease()), 0.1);
+    CCEaseElasticInOut*  move_ease_inout3= CCEaseElasticInOut::create((CCActionInterval*)(move3->copy()->autorelease()), 0.1);
+    
+    CCFiniteTimeAction*  move_ease_out1 = CCEaseSineInOut::create((CCActionInterval*)(move1->copy()->autorelease()));
+    CCFiniteTimeAction*  move_ease_out2 = CCEaseSineInOut::create((CCActionInterval*)(move2->copy()->autorelease()));
+    CCFiniteTimeAction*  move_ease_out3 = CCEaseSineInOut::create((CCActionInterval*)(move3->copy()->autorelease()));
+    
+    CCFiniteTimeAction* actions= CCSequence::create(move_ease_out1,
+                                                    move_ease_out2,
+                                                    move_ease_inout3, NULL);
+    
+    nodeUnit_->getCCSprite()->runAction(actions);
+    
+    targetUnit_->doDamage(atkData_.atk_value);
+}
+/////////////////////////////////////////////////////
+
 void BasePlaneUnit::doDamage(const int& dg_)
 {
     m_attribute.health -= dg_;
@@ -359,6 +398,7 @@ void BasePlaneUnit::doDamage(const int& dg_)
     
     CCPoint nowCcp = m_sprite->getPosition();
     
+    /*
     CCMoveTo*  move1 = CCMoveTo::create(0.1, ccp(nowCcp.x + 3.0f, nowCcp.y));
     CCMoveTo*  move2 = CCMoveTo::create(0.1, ccp(nowCcp.x - 3.0f, nowCcp.y));
     CCMoveTo*  move3 = CCMoveTo::create(0.1, ccp(nowCcp.x, nowCcp.y));
@@ -376,7 +416,7 @@ void BasePlaneUnit::doDamage(const int& dg_)
 
     m_sprite->runAction(actions);
 
-    
+    */
     if(m_attribute.health <= 0)
         m_bIsDead = true;
 }
@@ -409,7 +449,14 @@ void BasePlaneUnit::atkOtherPlane(BasePlaneUnit* plane_, const ATK_FUNCTION& fun
     
     SGameMainLogic->printfDiceLR(agiFactor + calcDex, agiFactor + calcAgi);
     if(dexFactor + calcDex > agiFactor + calcAgi)
-        plane_->doDamage(calcAtk);
+    {
+        //plane_->doDamage(calcAtk);
+        PlaneEvent* ev = EventFactor::GetInstance()->createPlaneEvent(this);
+        PlaneEvent::AtkData atkData;
+        atkData.atk_type = fun_;
+        atkData.atk_value = calcAtk;
+        ev->initWithUnitEvent(&raiseTest, &eventTest, plane_, atkData);
+    }
 }
 
 void BasePlaneUnit::goToPoint(const int &pointIndex_)

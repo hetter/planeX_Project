@@ -8,6 +8,7 @@
 #include "Core/HeadQuarter.h"
 #include "Base/IniReader.h"
 #include "Core/Configs/IniDataConfigs.hpp"
+#include "Core/BaseEvent.h"
 
 using namespace cocos2d;
 using namespace CocosDenshion;
@@ -53,6 +54,7 @@ bool GameMain::init()
     }
     
     IniDataConfigs::NewInstance();
+    EventFactor::NewInstance();
     
     m_topLayer = BaseLayer::create();
     addChild(m_topLayer->getCCLayer());
@@ -64,6 +66,8 @@ bool GameMain::init()
     this->schedule( schedule_selector(GameMain::update) );
     CCDirector* pDirector = CCDirector::sharedDirector();
     pDirector->getTouchDispatcher()->addTargetedDelegate(this,0,true);
+    
+    
     return true;
 }
 
@@ -75,11 +79,13 @@ void GameMain::clean()
         m_topLayer = NULL;
     }
     IniDataConfigs::ReleaseInstance();
+    EventFactor::ReleaseInstance();;
 }
 
 void GameMain::update(float dt)
 {
     //PlaneUnitMgr::GetInstance()->updatePlaneUnits();
+    EventFactor::GetInstance()->updateEvents();
 }
 
 bool GameMain::ccTouchBegan(cocos2d::CCTouch *touch_, cocos2d::CCEvent *event_)
