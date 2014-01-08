@@ -127,21 +127,26 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\BaseLayer.cpp" />
+    <ClCompile Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\GameLoginLayer.cpp" />
+    <ClCompile Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\MainLogicLayer.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Base\IniReader.cpp" />
     <ClCompile Include="..\Classes\Compent\EgCommon.cpp" />
     <ClCompile Include="..\Classes\Compent\PopupDialog.cpp" />
     <ClCompile Include="..\Classes\Compent\TroughCompent.cpp" />
     <ClCompile Include="..\Classes\Core\BaseEvent.cpp" />
-    <ClCompile Include="..\Classes\Core\GameLoginLayer.cpp" />
     <ClCompile Include="..\Classes\Core\HeadQuarter.cpp" />
-    <ClCompile Include="..\Classes\Core\MainLogicLayer.cpp" />
     <ClCompile Include="..\Classes\Core\PlanePoint.cpp" />
     <ClCompile Include="..\Classes\Core\PlaneUnit.cpp" />
     <ClCompile Include="..\Classes\GameMain.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Configs\IniDataConfigs.hpp" />
+    <ClInclude Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\BaseLayer.h" />
+    <ClInclude Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\GameLoginLayer.h" />
+    <ClInclude Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\MainLogicLayer.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Base\IniReader.h" />
     <ClInclude Include="..\Classes\Base\Singleton.hpp" />
@@ -149,9 +154,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\..\external\libwebsockets\win32\lib\*.*" "$(OutD
     <ClInclude Include="..\Classes\Compent\PopupDialog.h" />
     <ClInclude Include="..\Classes\Compent\TroughCompent.h" />
     <ClInclude Include="..\Classes\Core\BaseEvent.h" />
-    <ClInclude Include="..\Classes\Core\GameLoginLayer.h" />
     <ClInclude Include="..\Classes\Core\HeadQuarter.h" />
-    <ClInclude Include="..\Classes\Core\MainLogicLayer.h" />
     <ClInclude Include="..\Classes\Core\PlanePoint.h" />
     <ClInclude Include="..\Classes\Core\PlaneUnit.h" />
     <ClInclude Include="..\Classes\GameMain.h" />

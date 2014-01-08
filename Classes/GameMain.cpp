@@ -84,7 +84,8 @@ void GameMain::clean()
 
 void GameMain::update(float dt)
 {
-    //PlaneUnitMgr::GetInstance()->updatePlaneUnits();
+    if(PlaneUnitMgr::GetInstance())
+        PlaneUnitMgr::GetInstance()->updatePlaneUnits();
     EventFactor::GetInstance()->updateEvents();
 }
 

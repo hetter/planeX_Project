@@ -13,7 +13,7 @@
 #include "../Compent/EgCommon.h"
 #include "PlanePoint.h"
 #include "../GameMain.h"
-#include "MainLogicLayer.h"
+#include "layers/MainLogicLayer.h"
 #include "HeadQuarter.h"
 #include "../Compent/TroughCompent.h"
 #include "BaseEvent.h"
@@ -356,6 +356,15 @@ void BasePlaneUnit::goForward(const int &step_)
 /////////////////////////////////////////
 bool raiseTest(BasePlaneUnit* nodeUnit_, BasePlaneUnit* targetUnit_)
 {
+    if (!PlaneUnitMgr::GetInstance()->checkPlaneUnitAlive(nodeUnit_))
+    {
+        return true;
+    }
+    if (!PlaneUnitMgr::GetInstance()->checkPlaneUnitAlive(targetUnit_))
+    {
+        return true;
+    }
+
     CCPoint p1 = nodeUnit_->getCCSprite()->getPosition();
     CCPoint p2 = targetUnit_->getCCSprite()->getPosition();
     
@@ -368,6 +377,15 @@ bool raiseTest(BasePlaneUnit* nodeUnit_, BasePlaneUnit* targetUnit_)
 
 void eventTest(BasePlaneUnit* nodeUnit_, BasePlaneUnit* targetUnit_, const PlaneEvent::AtkData& atkData_)
 {
+
+    if (!PlaneUnitMgr::GetInstance()->checkPlaneUnitAlive(nodeUnit_))
+    {
+        return;
+    }
+    if (!PlaneUnitMgr::GetInstance()->checkPlaneUnitAlive(targetUnit_))
+    {
+        return;
+    }
     CCPoint nowCcp = nodeUnit_->getCCSprite()->getPosition();
     CCMoveTo*  move1 = CCMoveTo::create(0.1, ccp(nowCcp.x + 3.0f, nowCcp.y));
     CCMoveTo*  move2 = CCMoveTo::create(0.1, ccp(nowCcp.x - 3.0f, nowCcp.y));
@@ -384,9 +402,11 @@ void eventTest(BasePlaneUnit* nodeUnit_, BasePlaneUnit* targetUnit_, const Plane
                                                     move_ease_out2,
                                                     move_ease_inout3, NULL);
     
-    nodeUnit_->getCCSprite()->runAction(actions);
-    
-    targetUnit_->doDamage(atkData_.atk_value);
+    if (!nodeUnit_->isDead())
+    {
+        targetUnit_->getCCSprite()->runAction(actions);
+        targetUnit_->doDamage(atkData_.atk_value);
+    }
 }
 /////////////////////////////////////////////////////
 
@@ -421,7 +441,7 @@ void BasePlaneUnit::doDamage(const int& dg_)
         m_bIsDead = true;
 }
 
-void BasePlaneUnit::atkOtherPlane(BasePlaneUnit* plane_, const ATK_FUNCTION& fun_)
+int BasePlaneUnit::atkOtherPlane(BasePlaneUnit* plane_, const ATK_FUNCTION& fun_)
 {
     int dexFactor = GET_DICE;
     int agiFactor = GET_DICE;
@@ -457,6 +477,7 @@ void BasePlaneUnit::atkOtherPlane(BasePlaneUnit* plane_, const ATK_FUNCTION& fun
         atkData.atk_value = calcAtk;
         ev->initWithUnitEvent(&raiseTest, &eventTest, plane_, atkData);
     }
+    return calcAtk;
 }
 
 void BasePlaneUnit::goToPoint(const int &pointIndex_)
@@ -486,8 +507,8 @@ void BasePlaneUnit::_checkPointBattle(BasePlanePoint* point_, const POINT_BATTAL
                     atkOtherPlane(plane, STRIKE_ATK);
                 else
                 {
-                    atkOtherPlane(plane, NORMAL_ATK);
-                    if(!plane->isDead())
+                    int dmg = atkOtherPlane(plane, NORMAL_ATK);
+                    if(plane->m_attribute.health - dmg > 0)
                     {
                         plane->atkOtherPlane(this, RUNAWAY_ATK);
                     }
@@ -594,6 +615,21 @@ bool PlaneUnitMgr::addPlaneUnit(const PLANE_FORCES& forces_,
     m_planeUnits[forces_].push_back(plane);
 
     return true;
+}
+
+bool PlaneUnitMgr::checkPlaneUnitAlive(BasePlaneUnit* unit_)
+{
+    for (int i = 0; i < PLANE_FORCES_COUNT; ++i)
+    {
+        for (int j = 0; j < m_planeUnits[i].size(); ++j)
+        {
+            if (m_planeUnits[i][j] == unit_)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 void PlaneUnitMgr::updatePlaneEvents(const float& dt_)

@@ -49,7 +49,7 @@ public:
         STRIKE_ATK,
         KILL_ATK,
     };
-    void atkOtherPlane(BasePlaneUnit* plane_, const ATK_FUNCTION& fun_);
+    int atkOtherPlane(BasePlaneUnit* plane_, const ATK_FUNCTION& fun_);
     
 private:
     typedef std::vector<cocos2d::CCFiniteTimeAction*> CCActionVec;
@@ -107,6 +107,7 @@ public:
     BasePlaneUnit* checkAndGetPlaneUnit(const cocos2d::CCPoint& point_);
     BasePlaneUnit* getPlaneUnitOnRing(const int& index);
     
+    bool checkPlaneUnitAlive(BasePlaneUnit* unit_);
     bool removePlaneUnit(BasePlaneUnit* unit_);
     bool removePlaneUnitByID(const PLANE_FORCES& forces_, const int& id_);
     

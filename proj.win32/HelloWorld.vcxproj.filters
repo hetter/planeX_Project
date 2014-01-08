@@ -16,8 +16,11 @@
     <Filter Include="Classes\Core">
       <UniqueIdentifier>{aef8a891-5633-4921-99a2-654c986381dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\platform">
-      <UniqueIdentifier>{c7f1b3a4-6b42-44ef-82c7-23aeb4787513}</UniqueIdentifier>
+    <Filter Include="Classes\Core\Layers">
+      <UniqueIdentifier>{cbe31259-c5d7-4fdb-a555-56d587223de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Core\Configs">
+      <UniqueIdentifier>{93b00da4-a93b-4dda-a6a6-342a523b87c9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -51,14 +54,17 @@
     <ClCompile Include="..\Classes\Core\HeadQuarter.cpp">
       <Filter>Classes\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Core\MainLogicLayer.cpp">
-      <Filter>Classes\Core</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Core\PlanePoint.cpp">
       <Filter>Classes\Core</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Core\GameLoginLayer.cpp">
-      <Filter>Classes\Core</Filter>
+    <ClCompile Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\BaseLayer.cpp">
+      <Filter>Classes\Core\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\GameLoginLayer.cpp">
+      <Filter>Classes\Core\Layers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\MainLogicLayer.cpp">
+      <Filter>Classes\Core\Layers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,11 +107,17 @@
     <ClInclude Include="..\Classes\Core\HeadQuarter.h">
       <Filter>Classes\Core</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Core\MainLogicLayer.h">
-      <Filter>Classes\Core</Filter>
+    <ClInclude Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Configs\IniDataConfigs.hpp">
+      <Filter>Classes\Core\Configs</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Core\GameLoginLayer.h">
-      <Filter>Classes\Core</Filter>
+    <ClInclude Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\MainLogicLayer.h">
+      <Filter>Classes\Core\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\BaseLayer.h">
+      <Filter>Classes\Core\Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\cc2_sprite_tool\src\planeX_Project\Classes\Core\Layers\GameLoginLayer.h">
+      <Filter>Classes\Core\Layers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

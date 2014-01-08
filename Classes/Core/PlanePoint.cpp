@@ -14,7 +14,7 @@
 #include "cocos2d.h"
 
 #include "../GameMain.h"
-#include "MainLogicLayer.h"
+#include "layers/MainLogicLayer.h"
 #include "PlaneUnit.h"
 #include "../Base/IniReader.h"
 
@@ -460,7 +460,7 @@ void PlanePointMgr::_addRoadPoint(const cocos2d::CCPoint&   point_,
             CCSprite* sprite = CCSprite::create(m_titleDataUnit.texName.c_str(), m_titleDataUnit.rectVec[targetIndex]);
             sprite->setPosition(ccp(offset.x * i + point_.x, offset.y * i + point_.y));
             BasePlanePoint* bpPoint = NULL;
-            if(COLOR_POINT[nowForces] % 2)
+            if((COLOR_POINT[nowForces] - 1) % 2)
                 bpPoint = new AtkPlanePoint(sprite, (PLANE_FORCES)nowForces, dir_);
             else
                 bpPoint = new StopPlanePoint(sprite, (PLANE_FORCES)nowForces, dir_);

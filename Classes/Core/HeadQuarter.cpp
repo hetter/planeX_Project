@@ -11,7 +11,7 @@
 #include "cocos2d.h"
 #include "../Compent/EgCommon.h"
 #include "../GameMain.h"
-#include "MainLogicLayer.h"
+#include "layers/MainLogicLayer.h"
 #include "PlaneUnit.h"
 
 USING_NS_CC;
