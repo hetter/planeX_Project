@@ -1,0 +1,12 @@
+#define RED_POINT_ATK 0 
+#define RED_POINT_STOP 1 
+#define RED_GOAL 2 
+#define BLUE_POINT_ATK 3 
+#define BLUE_POINT_STOP 4 
+#define BLUE_GOAL 5 
+#define YELLOW_POINT_ATK 6 
+#define YELLOW_POINT_STOP 7 
+#define YELLOW_GOAL 8 
+#define GREEN_POINT_ATK 9 
+#define GREEN_POINT_STOP 10 
+#define GREEN_GOAL 11 

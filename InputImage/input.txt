@@ -1,0 +1,4 @@
+red_point_atk.png red_point_stop.png red_goal.png
+blue_point_atk.png blue_point_stop.png blue_goal.png
+yellow_point_atk.png yellow_point_stop.png yellow_goal.png
+green_point_atk.png green_point_stop.png green_goal.png
