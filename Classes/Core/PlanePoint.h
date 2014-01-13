@@ -94,7 +94,6 @@ public:
     ~PlanePointMgr();
     
     void init(cocos2d::CCLayer* parentLayer_);
-    void loadTitleFile(const std::string& name_);
     cocos2d::CCSprite* createTitleSprite(const std::string& name_);
 public:
     BasePlanePoint* getRingPlanePoint(const int& index_);
@@ -115,8 +114,6 @@ private:
                                    const int& lenth_, bool isInvert_ = false, bool isPure_ = false);
 private:
     typedef std::map<int, std::string> PlanePointMap;
-
-    TitleDataUnit m_titleDataUnit;
     
     typedef std::vector<BasePlanePoint*> PlanePointVec;
     PlanePointVec m_ringPointsVector;

@@ -30,11 +30,15 @@ MainLogicLayer::~MainLogicLayer()
 {
     PlanePointMgr::ReleaseInstance();
     PlaneUnitMgr::ReleaseInstance();
+    
+    CCSpriteFrameCache::sharedSpriteFrameCache()->removeSpriteFramesFromFile("GameElement.plist");
 }
 
 // on "init" you need to initialize your instance
 void MainLogicLayer::onEnter()
 {
+    CCSpriteFrameCache::sharedSpriteFrameCache()->addSpriteFramesWithFile("GameElement.plist", "GameElement.png");
+    
     // ask director the window size
     CCSize size = CCDirector::sharedDirector()->getWinSize();
         

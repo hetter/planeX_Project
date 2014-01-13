@@ -22,6 +22,9 @@ public:
     const PLANE_FORCES& getForces() {return m_forces;}
     void emptyAirFieldOnce(const cocos2d::CCPoint& pos_);
     void addTolayer(cocos2d::CCLayer* layer_);
+    
+    bool isReachGameEndPoint();
+    void turnStartRefresh();
 private:
     struct Airfield
     {
@@ -34,6 +37,11 @@ private:
     PLANE_FORCES m_forces;
     cocos2d::CCSprite* m_hqSprite;
     BasePlaneUnit* m_UnitsInHq[MAX_PLANE_UNITS];
+    
+    int m_gold;
+    int m_fuelOil;
+    int m_fInshPlaneCount;
+    int m_brokenPlaneCount;
 };
 
 #endif /* defined(__plane_demo__HeadQuarter__) */

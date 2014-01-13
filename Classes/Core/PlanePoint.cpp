@@ -158,8 +158,6 @@ PlanePointMgr::~PlanePointMgr()
 
 void PlanePointMgr::init(CCLayer* parentLayer_)
 {
-    loadTitleFile("baseTitle");
-    
     float point_width  = POINT_WIDTH;
     float point_height = POINT_HEIGHT;
     
@@ -273,30 +271,6 @@ void PlanePointMgr::init(CCLayer* parentLayer_)
     //_addRoadPoint(ccp(point_width * 8.4f,  point_height * 0.95f), PLANE_FORCES_RED, POINT_UP, 6, true, true);
 }
 
-void PlanePointMgr::loadTitleFile(const std::string& name_)
-{
-    std::string dataName = name_ + "Data";
-
-    std::string fullPath = CCFileUtils::sharedFileUtils()->fullPathForFilename(dataName.c_str());
-    
-    std::ifstream fin(fullPath.c_str(), std::ios::binary);
-
-    for (std::string line; getline(fin, line); )
-    {
-        std::stringstream ss(line);
-        float bx(0), by(0), bw(0), bh(0);
-        ss >> bx >> by >> bw >> bh;
-        m_titleDataUnit.rectVec.push_back(CCRect(bx, by, bw, bh));
-    }
-
-    m_titleDataUnit.texName = name_ + ".png";
-    
-    extern float POINT_WIDTH;
-    extern float POINT_HEIGHT;
-    POINT_WIDTH = 50;//m_titleDataUnit.rectVec[RED_GOAL].size.width;
-    POINT_HEIGHT = 50;//m_titleDataUnit.rectVec[RED_GOAL].size.height;
-}
-
 BasePlanePoint* PlanePointMgr::getRingPlanePoint(const int &index_)
 {
     if(index_ >= m_ringPointsVector.size())
@@ -394,13 +368,13 @@ void PlanePointMgr::_addRoadPoint(const cocos2d::CCPoint&   point_,
 
     if(isPure_)
     {
-        point_width = 50;//m_titleDataUnit.rectVec[RED_GOAL].size.width;
-        point_height = 50;//m_titleDataUnit.rectVec[RED_GOAL].size.height;
+        point_width = 50;
+        point_height = 50;
     }
     else
     {
-        point_width = 50;//m_titleDataUnit.rectVec[RED_POINT_ATK].size.width;
-        point_height = 50;//m_titleDataUnit.rectVec[RED_POINT_ATK].size.height;
+        point_width = 50;
+        point_height = 50;
     }
     
     CCPoint offset;
@@ -428,43 +402,43 @@ void PlanePointMgr::_addRoadPoint(const cocos2d::CCPoint&   point_,
     {        
         if(!isPure_)
         {
+            CCSprite* sprite = NULL;
             switch (nowForces)
             {
                 case PLANE_FORCES_GREEN:
                     if(COLOR_POINT[nowForces] % 2)
-                        targetIndex = GREEN_POINT_ATK;
+                        sprite = CCSprite::createWithSpriteFrameName("green_point_atk.png");
                     else
-                        targetIndex = GREEN_POINT_STOP;
+                        sprite = CCSprite::createWithSpriteFrameName("green_point_stop.png");
                     break;
                 case PLANE_FORCES_RED:
                     if(COLOR_POINT[nowForces] % 2)
-                        targetIndex = RED_POINT_ATK;
+                        sprite = CCSprite::createWithSpriteFrameName("red_point_atk.png");
                     else
-                        targetIndex = RED_POINT_STOP;
+                        sprite = CCSprite::createWithSpriteFrameName("red_point_stop.png");;
                     break;
                 case PLANE_FORCES_YELLOW:
                     if(COLOR_POINT[nowForces] % 2)
-                        targetIndex = YELLOW_POINT_ATK;
+                        sprite = CCSprite::createWithSpriteFrameName("yellow_point_atk.png");
                     else
-                        targetIndex = YELLOW_POINT_STOP;
+                       sprite = CCSprite::createWithSpriteFrameName("yellow_point_stop.png");
                     break;
                 case PLANE_FORCES_BLUE:
                     if(COLOR_POINT[nowForces] % 2)
-                        targetIndex = BLUE_POINT_ATK;
+                        sprite = CCSprite::createWithSpriteFrameName("blue_point_atk.png");
                     else
-                        targetIndex = BLUE_POINT_STOP;
+                        sprite = CCSprite::createWithSpriteFrameName("blue_point_stop.png");
                     break;
             }
             ++COLOR_POINT[nowForces];
             
-            CCSprite* sprite = CCSprite::create(m_titleDataUnit.texName.c_str(), m_titleDataUnit.rectVec[targetIndex]);
             sprite->setPosition(ccp(offset.x * i + point_.x, offset.y * i + point_.y));
             BasePlanePoint* bpPoint = NULL;
             if((COLOR_POINT[nowForces] - 1) % 2)
                 bpPoint = new AtkPlanePoint(sprite, (PLANE_FORCES)nowForces, dir_);
             else
                 bpPoint = new StopPlanePoint(sprite, (PLANE_FORCES)nowForces, dir_);
-            //BasePlanePoint* bpPoint = new BasePlanePoint(offset.x * i + point_.x, offset.y * i + point_.y, nowForces);
+
             bpPoint->setIndex(m_ringPointsVector.size());
             m_ringPointsVector.push_back(bpPoint);
 
@@ -480,24 +454,25 @@ void PlanePointMgr::_addRoadPoint(const cocos2d::CCPoint&   point_,
         }
         else
         {
+            CCSprite* sprite = NULL;
             switch (nowForces)
             {
                 case PLANE_FORCES_GREEN:
-                    targetIndex = GREEN_GOAL;
+                    sprite = CCSprite::createWithSpriteFrameName("green_goal.png");
                     break;
                 case PLANE_FORCES_RED:
-                    targetIndex = RED_GOAL;
+                    sprite = CCSprite::createWithSpriteFrameName("red_goal.png");
                     break;
                 case PLANE_FORCES_YELLOW:
-                    targetIndex = YELLOW_GOAL;
+                    sprite = CCSprite::createWithSpriteFrameName("yellow_goal.png");
                     break;
                 case PLANE_FORCES_BLUE:
-                    targetIndex = BLUE_GOAL;
+                    sprite = CCSprite::createWithSpriteFrameName("blue_goal.png");
                     break;
             }
             
             BasePlanePoint* bpPoint = NULL;
-            CCSprite* sprite = CCSprite::create(m_titleDataUnit.texName.c_str(), m_titleDataUnit.rectVec[targetIndex]);
+
             sprite->setPosition(ccp(offset.x * i + point_.x, offset.y * i + point_.y));
             
 

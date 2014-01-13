@@ -47,25 +47,25 @@ BasePlaneUnit::BasePlaneUnit(const PLANE_FORCES& forces_, const PLANE_UNIT_TYPE&
 ,m_bIsDead(false)
 ,m_bIsInGoal(false)
 {
-    m_sprite = CCSprite::create("plane_shadow.png");
+    m_sprite = CCSprite::createWithSpriteFrameName("plane_shadow.png");
     m_sprite->setAnchorPoint(ccp(0.5f, 0.5f));   
     CCSprite* addSprite = NULL;
     switch (m_forces)
     {
         case PLANE_FORCES_GREEN:
-            addSprite = CCSprite::create("plane_green.png");
+            addSprite = CCSprite::createWithSpriteFrameName("plane_green.png");
             GetUnitMgr->getParentLayer()->addChild(m_sprite);
             break;
         case PLANE_FORCES_BLUE:
-            addSprite = CCSprite::create("plane_blue.png");
+            addSprite = CCSprite::createWithSpriteFrameName("plane_blue.png");
             GetUnitMgr->getParentLayer()->addChild(m_sprite);
             break;
         case PLANE_FORCES_RED:
-            addSprite = CCSprite::create("plane_red.png");
+            addSprite = CCSprite::createWithSpriteFrameName("plane_red.png");
             GetUnitMgr->getParentLayer()->addChild(m_sprite);
             break;
         case PLANE_FORCES_YELLOW:
-            addSprite = CCSprite::create("plane_yellow.png");
+            addSprite = CCSprite::createWithSpriteFrameName("plane_yellow.png");
             GetUnitMgr->getParentLayer()->addChild(m_sprite);
             break;
         default:
