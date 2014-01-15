@@ -20,11 +20,8 @@ class IniDataConfigs:public Singleton<IniDataConfigs>
 public:
     IniDataConfigs()
     {
-        //battleConfig
-        std::string batConfigfullPath = cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename("battleConfig.ini");
-        IniReader bcIniReader;
-        bcIniReader.loadIniFile(batConfigfullPath.c_str());
-        IniDataMap["BattleConfig"] = bcIniReader;
+        _loadIniFile("battleConfig.ini", "BattleConfig");
+        _loadIniFile("battleResConfig.ini", "BattleResConfig");
     }
     
     ~IniDataConfigs()
@@ -34,6 +31,14 @@ public:
 public:
     typedef std::map<std::string, IniReader> IniMap;
     IniMap IniDataMap;
+private:
+    void _loadIniFile(const char* fileName_, const std::string& keyName_)
+    {
+        std::string configfullPath = cocos2d::CCFileUtils::sharedFileUtils()->fullPathForFilename(fileName_);
+        IniReader iniReader;
+        iniReader.loadIniFile(configfullPath.c_str());
+        IniDataMap[keyName_] = iniReader;
+    }
 };
 
 #define GetIniConfigs (IniDataConfigs::GetInstance()->IniDataMap)

@@ -397,7 +397,6 @@ void PlanePointMgr::_addRoadPoint(const cocos2d::CCPoint&   point_,
     }
     
     int nowForces = head_;
-    int targetIndex = 0;
     for (int i = 0; i < lenth_;  i ++)
     {        
         if(!isPure_)

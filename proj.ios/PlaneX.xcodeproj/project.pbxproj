@@ -139,6 +139,7 @@
 		1809EDCD1875B969002474EA /* button2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809EDC91875B969002474EA /* button2.png */; };
 		1809EDCE1875B969002474EA /* plane_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 1809EDCA1875B969002474EA /* plane_1.json */; };
 		1809EDCF1875B969002474EA /* strikers_1945_front.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809EDCB1875B969002474EA /* strikers_1945_front.png */; };
+		1824C9C41885841700E3A810 /* battleResConfig.ini in Resources */ = {isa = PBXBuildFile; fileRef = 1824C9C31885841700E3A810 /* battleResConfig.ini */; };
 		183A0FEF187701C900049A6C /* GameLoginLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 183A0FED187701C900049A6C /* GameLoginLayer.cpp */; };
 		183A0FF21877022100049A6C /* MainLogicLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 183A0FF01877022100049A6C /* MainLogicLayer.cpp */; };
 		1858D8861866EDB400FC0611 /* BaseEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1858D8851866EDB400FC0611 /* BaseEvent.cpp */; };
@@ -551,6 +552,7 @@
 		1809EDC91875B969002474EA /* button2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button2.png; sourceTree = "<group>"; };
 		1809EDCA1875B969002474EA /* plane_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = plane_1.json; sourceTree = "<group>"; };
 		1809EDCB1875B969002474EA /* strikers_1945_front.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = strikers_1945_front.png; sourceTree = "<group>"; };
+		1824C9C31885841700E3A810 /* battleResConfig.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = battleResConfig.ini; sourceTree = "<group>"; };
 		183A0FED187701C900049A6C /* GameLoginLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameLoginLayer.cpp; path = ../Classes/Core/Layers/GameLoginLayer.cpp; sourceTree = "<group>"; };
 		183A0FEE187701C900049A6C /* GameLoginLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameLoginLayer.h; path = ../Classes/Core/Layers/GameLoginLayer.h; sourceTree = "<group>"; };
 		183A0FF01877022100049A6C /* MainLogicLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainLogicLayer.cpp; path = ../Classes/Core/Layers/MainLogicLayer.cpp; sourceTree = "<group>"; };
@@ -1822,6 +1824,7 @@
 		78C7DDAA14EBA5050085D0C2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1824C9C31885841700E3A810 /* battleResConfig.ini */,
 				186D354E18843D1E003AE3E5 /* GameElement.plist */,
 				186D354F18843D1E003AE3E5 /* GameElement.png */,
 				1809EDC81875B969002474EA /* button.png */,
@@ -1931,6 +1934,7 @@
 				188CA45C1842420900DA5493 /* mapConfig.ini in Resources */,
 				379BB9D017F03F3700829B88 /* json_valueiterator.inl in Resources */,
 				379BB9D217F03F3700829B88 /* sconscript in Resources */,
+				1824C9C41885841700E3A810 /* battleResConfig.ini in Resources */,
 				188CA4551842420900DA5493 /* baseTitleData in Resources */,
 				188CA4541842420900DA5493 /* baseTitle.png in Resources */,
 			);

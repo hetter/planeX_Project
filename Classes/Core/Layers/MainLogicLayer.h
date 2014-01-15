@@ -34,6 +34,8 @@ public:
     void ccTouchEnded   (cocos2d::CCTouch* touch_, cocos2d:: CCEvent* event_);
     
     void popCallback(cocos2d::CCNode *pNode);
+    
+    void nextTurn();
 
 public:
     HeadQuarter* getHeadQuarter(const PLANE_FORCES& forces_) {return  m_headQuarters[forces_];}
@@ -46,6 +48,7 @@ public:
     void printfDiceLR(const int& diceL_, const int& diceR_);
 private:
     HeadQuarter* m_headQuarters[PLANE_FORCES_COUNT];
+    PLANE_FORCES m_nowFrocesTurn;
 };
 
 #endif /* defined(__plane_demo__MainLogicLayer__) */

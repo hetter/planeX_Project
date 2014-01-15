@@ -25,6 +25,8 @@ public:
     
     bool isReachGameEndPoint();
     void turnStartRefresh();
+    
+    void createPlane(const PLANE_UNIT_TYPE& planeType);
 private:
     struct Airfield
     {
@@ -36,7 +38,6 @@ private:
 private:
     PLANE_FORCES m_forces;
     cocos2d::CCSprite* m_hqSprite;
-    BasePlaneUnit* m_UnitsInHq[MAX_PLANE_UNITS];
     
     int m_gold;
     int m_fuelOil;

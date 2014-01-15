@@ -80,6 +80,7 @@ void MainLogicLayer::onEnter()
     menu->setPosition(CCPointZero);
     m_CCLayer->addChild(menu);
     
+    m_nowFrocesTurn = PLANE_FORCES_RED;
     m_headQuarters[PLANE_FORCES_BLUE] = new HeadQuarter(PLANE_FORCES_BLUE);
     m_headQuarters[PLANE_FORCES_BLUE]->addTolayer(m_CCLayer);
     m_headQuarters[PLANE_FORCES_YELLOW] = new HeadQuarter(PLANE_FORCES_YELLOW);
@@ -99,6 +100,16 @@ void MainLogicLayer::onEnter()
     
     GetPointMgr->init(m_CCLayer);
     GetUnitMgr->init(m_CCLayer);
+}
+
+void MainLogicLayer::nextTurn()
+{
+    m_nowFrocesTurn = (PLANE_FORCES) ((int)m_nowFrocesTurn + 1);
+    if (m_nowFrocesTurn == PLANE_FORCES_COUNT)
+    {
+        m_nowFrocesTurn = (PLANE_FORCES) 0;
+    }
+    m_headQuarters[m_nowFrocesTurn]->turnStartRefresh();
 }
 
 void MainLogicLayer::printfDiceLR(const int& diceL_, const int& diceR_)
@@ -139,18 +150,20 @@ bool MainLogicLayer::ccTouchBegan(cocos2d::CCTouch *touch_, cocos2d::CCEvent *ev
     CCPoint relPoint = ccpSub(touch_->getLocation(), m_CCLayer->getPosition());
     
     BasePlaneUnit* unit = PlaneUnitMgr::GetInstance()->checkAndGetPlaneUnit(relPoint);
-    if(unit)
+    if(unit && unit->getForces() == m_nowFrocesTurn)
     {
         int randNumber = 5;//GET_DICE;
         char num[10] = {0};
         sprintf(num, "%d", randNumber);
         m_labelTTF->setString(num);
         unit->goForward(randNumber);
+        nextTurn();
         return false;
     }
     
-    for(int i = 0; i < PLANE_FORCES_COUNT; ++i)
+    //for(int i = 0; i < PLANE_FORCES_COUNT; ++i)
     {
+        int i = m_nowFrocesTurn;
         if(m_headQuarters[i]->onTouch(relPoint))
             return false;
     }

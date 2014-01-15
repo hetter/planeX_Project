@@ -18,6 +18,9 @@ USING_NS_CC;
 
 HeadQuarter::HeadQuarter(const PLANE_FORCES& forces_)
 :m_forces(forces_)
+,m_fuelOil(0)
+,m_brokenPlaneCount(0)
+,m_fInshPlaneCount(0)
 {
     extern float POINT_WIDTH;
     extern float POINT_HEIGHT;
@@ -66,6 +69,8 @@ HeadQuarter::HeadQuarter(const PLANE_FORCES& forces_)
             girdX = 12.7f;
             girdY = 1.8f;
             girdXStep = -girdXStep;
+            break;
+        default:
             break;
     }
     
@@ -119,6 +124,7 @@ HeadQuarter::HeadQuarter(const PLANE_FORCES& forces_)
         m_airfields[i].position = ccpAdd(hqPoint, office);
     }
     
+    m_gold = GetIniConfigs["BattleResConfig"].getAttributeInt("gold_payment", "first_gold");
     //SGameMain->getMainLogicLayer()->addChild(m_hqSprite);
 }
 
@@ -154,7 +160,9 @@ bool HeadQuarter::onTouch(const cocos2d::CCPoint &touch_)
             if(!m_airfields[i].bIsUsed)
             {
                 if(PlaneUnitMgr::GetInstance()->addPlaneUnit(m_forces, PLANE_UNIT_NORMAL, m_airfields[i].position))
+                {
                     m_airfields[i].bIsUsed = true;
+                }
                 break;
             }
         }
@@ -165,3 +173,49 @@ bool HeadQuarter::onTouch(const cocos2d::CCPoint &touch_)
         return false;
 }
 
+void HeadQuarter::turnStartRefresh()
+{
+    m_gold += GetIniConfigs["BattleResConfig"].getAttributeInt("gold_payment", "turn_recover_gold");
+}
+
+bool HeadQuarter::isReachGameEndPoint()
+{
+    return false;
+}
+
+void HeadQuarter::createPlane(const PLANE_UNIT_TYPE& planeType)
+{
+    if (PlaneUnitMgr::GetInstance()->getPlanes(m_forces).size() < MAX_PLANE_UNITS)
+    {
+        int payGold = 0;
+        switch (planeType)
+        {
+            case PLANE_UNIT_NORMAL:
+                payGold = GetIniConfigs["BattleResConfig"].getAttributeInt("gold_payment", "create_normal_plane");
+                break;
+            case PLANE_UNIT_SPEED:
+                payGold = GetIniConfigs["BattleResConfig"].getAttributeInt("gold_payment", "create_speed_plane");
+                break;
+            case PLANE_UNIT_ARMER:
+                payGold = GetIniConfigs["BattleResConfig"].getAttributeInt("gold_payment", "create_armer_plane");
+                break;
+            default:
+                break;
+        }
+        if (m_gold >= payGold)
+        {
+            for(int i = 0; i < MAX_PLANE_UNITS; ++i)
+            {
+                if(!m_airfields[i].bIsUsed)
+                {
+                    if(PlaneUnitMgr::GetInstance()->addPlaneUnit(m_forces, planeType, m_airfields[i].position))
+                    {
+                        m_gold -= payGold;
+                        m_airfields[i].bIsUsed = true;
+                    }
+                    break;
+                }
+            }
+        }
+    }
+}
